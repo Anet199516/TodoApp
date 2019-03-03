@@ -2,6 +2,10 @@ body {
     background-color: whitesmoke;
   }
 
+  .checked-item:hover {
+    cursor: pointer;
+  }
+
   .title {
     text-align: center;
     font-size: 40px;
@@ -15,12 +19,49 @@ body {
     border-radius: 10px;
   }
 
+  .remove-button-item:hover {
+    cursor: pointer;
+    background-color: palevioletred;
+  }
+
+  .container-buttons {
+    display: flex;
+    margin-top: 20px;
+  }
+
+  .filter-buttons {
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 10px;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+    font-family: 'Mali', cursive;
+    background-color: darksalmon;
+  }
+
+  .filter-buttons:hover {
+    cursor: pointer;
+    background-color: aqua;
+  }
+
+  .filter-buttons:focus {
+    outline: none;
+}
+
+  .filter-buttons:active {
+    transform: translateY(4px);
+    filter: saturate(150%);
+    outline: none;
+}
+
   .button-todo-list {
     height: 40px;
     width: 70px;
     margin-top: 10px;
     border-radius: 10px;
     font-size: 20px;
+    font-family: 'Mali', cursive;
   }
 
   .button-todo-list:hover {

@@ -9,11 +9,12 @@ const TodoItem = (props) => {
   return (
     <div className="todo-item">
       <input
+        className="checked-item"
         type="checkbox"
         checked={props.item.completed}
         onChange={() => props.handleItem(props.item.id)}
       />
-      <p style={props.item.completed ? stylesForCompleted : null }>{props.item.text}</p>
+      <p style={props.item.completed ? stylesForCompleted : null}>{props.item.text}</p>
     </div>
   );
 };
