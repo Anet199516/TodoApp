@@ -71,13 +71,25 @@ class App extends React.Component {
 
   getModeForItems(mode) {
     this.setState({ mode });
-    console.log(mode)
+  }
+
+  getTodosForRender() {
+    const { todos, mode } = this.state;
+    let filteredItems = todos;
+    if (mode === 'Active') {
+      filteredItems = todos.filter(item => item.completed === false );
+    }
+    if (mode === 'Completed') {
+      filteredItems = todos.filter(item => item.completed === true );
+    }
+    return filteredItems;
   }
 
   render() {
     const { todos, newItemText } = this.state;
     const activeTodos = todos.filter(item => item.completed === false);
-    const todoItems = todos.map(item => (
+    const todosForRender = this.getTodosForRender();
+    const todoItems = todosForRender.map(item => (
       <>
         <TodoItem
           key={item.id}
