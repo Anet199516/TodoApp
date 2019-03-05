@@ -25,12 +25,28 @@ class App extends React.Component {
       ],
 
       mode: 'All',
-
+      /* eslint-disable react/no-unused-state */
       newItemsText: '',
 
     };
     this.getModeForItems = this.getModeForItems.bind(this);
     this.handleItem = this.handleItem.bind(this);
+  }
+
+  getModeForItems(mode) {
+    this.setState({ mode });
+  }
+
+  getTodosForRender() {
+    const { todos, mode } = this.state;
+    let filteredItems = todos;
+    if (mode === 'Active') {
+      filteredItems = todos.filter(item => item.completed === false);
+    }
+    if (mode === 'Completed') {
+      filteredItems = todos.filter(item => item.completed === true);
+    }
+    return filteredItems;
   }
 
   handleItemAdded() {
@@ -41,6 +57,7 @@ class App extends React.Component {
         text: newItemText,
         completed: false,
       };
+      /* eslint-disable consistent-return */
       return {
         todos: [...todos, newTodo],
         newItemText: '',
@@ -54,12 +71,14 @@ class App extends React.Component {
     });
   }
 
-
   handleItem(id) {
     this.setState((prevState) => {
       const newTodos = prevState.todos.map((todo) => {
         if (todo.id === id) {
-          todo.completed = !todo.completed;
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
         }
         return todo;
       });
@@ -67,22 +86,6 @@ class App extends React.Component {
         todos: newTodos,
       };
     });
-  }
-
-  getModeForItems(mode) {
-    this.setState({ mode });
-  }
-
-  getTodosForRender() {
-    const { todos, mode } = this.state;
-    let filteredItems = todos;
-    if (mode === 'Active') {
-      filteredItems = todos.filter(item => item.completed === false );
-    }
-    if (mode === 'Completed') {
-      filteredItems = todos.filter(item => item.completed === true );
-    }
-    return filteredItems;
   }
 
   render() {
@@ -129,7 +132,7 @@ class App extends React.Component {
             <FilteredButtons onClick={this.getModeForItems}>
             Active
             </FilteredButtons>
-            
+
             <FilteredButtons onClick={this.getModeForItems}>
             Completed
             </FilteredButtons>
